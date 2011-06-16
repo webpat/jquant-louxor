@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<!-- 
+		<transactionManager type="JDBC" commitRequired="false">
+		<dataSource type="com.sgam.jquant.tanis.data.datasource.TanisOracleDataSourceFactory"/>
+		</transactionManager>
+	-->
+
+	<settings 
+	useStatementNamespaces="true" 
+	enhancementEnabled="true"
+	/>
+
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_CDS_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_FOREX_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_TIME_DEPOSIT_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_QUOTE_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/VOLATILITY_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_VAR_SWAP_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_INDEX_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_STOCK_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/TICKER_RATE_MATURITY_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/LXR_CASH_DIVIDEND_SqlMap.xml" />
+	<sqlMap resource="com/sgam/jquant/data/impl/louxor/dao/HESTON_PARAMETERS_SqlMap.xml" />
+	
+</sqlMapConfig>

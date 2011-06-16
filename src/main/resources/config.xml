@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jquant-conf>
+	<database>
+		<urls>
+			<prod>jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST=
+			(ADDRESS=(PROTOCOL=TCP)(HOST=castor-vip.fr.sgam.socgen)(PORT = 1521)) 
+			(ADDRESS=(PROTOCOL=TCP)(HOST=pollux-vip.fr.sgam.socgen)(PORT = 1521))
+			(LOAD_BALANCE=yes)(FAILOVER=yes))(CONNECT_DATA=(SERVICE_NAME=LOUXOR)))
+			</prod>
+			<homolo>jdbc:oracle:thin:@thales.fr.sgam.socgen:1521:louxhom</homolo>	
+		</urls>
+		<url>${database.urls.prod}</url>
+		<user>icare</user>
+		<password>icare</password>
+	</database>
+</jquant-conf>
