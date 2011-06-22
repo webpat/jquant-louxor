@@ -26,5 +26,6 @@
 	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils/2.3/unitils-2.3.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jquant-core"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/opencsv/opencsv/2.0/opencsv-2.0.jar" sourcepath="/M2_REPO/net/sf/opencsv/opencsv/2.0/opencsv-2.0-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
