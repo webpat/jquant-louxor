@@ -1,15 +1,21 @@
 package org.jquant.data.louxor;
 
-public class TickerBean {
+public class StockTickerBean {
 
-	// QUOTATION_FACTOR,FIRST_QUOTE,LAST_QUOTE,LAST_AUDIT,START_DATE,DAILY_UPDATE,LAST_UPDATE,INSTRUMENT_CREATED,INSTRUMENT_CREATOR,INSTRUMENT_UPDATED,INSTRUMENT_UPDATER,TICKER_CREATED,TICKER_CREATOR,TICKER_UPDATED,TICKER_UPDATER
-	private String internal_code;
+	// INSTRUMENT_CREATED,INSTRUMENT_CREATOR,INSTRUMENT_UPDATED,INSTRUMENT_UPDATER,TICKER_CREATED,TICKER_CREATOR,TICKER_UPDATED,TICKER_UPDATER
+	private String INTERNAL_CODE;
 	private String instrument_id;
 	private String name;
 	private String quote_percent;
+	private String issuer_id;
+	private String issuer_name;
+	private String issuer_amount;
+	private String dividend_frequency;
+	private String lot_size;
 	private String provider_id;
 	private String provider_name;
 	private String ticker;
+	private String ticker_id;
 	private String provider_market_name;
 	private String mic_id;
 	private String mic_code;
@@ -17,23 +23,26 @@ public class TickerBean {
 	private String description;
 	private String city;
 	private String payment_currency;
+	private String fundamental_currency;
 	private String update_frequency;
 	private String quotation_factor;
 	private String first_quote;
 	private String last_quote;
 	private String start_date;
+	private String daily_update;
+	private String last_update;
 	
 	
 	
-	public TickerBean() {
+	public StockTickerBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public String getInternal_code() {
-		return internal_code;
+	public String getINTERNAL_CODE() {
+		return INTERNAL_CODE;
 	}
-	public void setInternal_code(String internal_code) {
-		this.internal_code = internal_code;
+	public void setINTERNAL_CODE(String internal_code) {
+		this.INTERNAL_CODE = internal_code;
 	}
 	public String getInstrument_id() {
 		return instrument_id;
@@ -143,6 +152,69 @@ public class TickerBean {
 	}
 	public void setStart_date(String start_date) {
 		this.start_date = start_date;
+	}
+	public String getDaily_update() {
+		return daily_update;
+	}
+	public void setDaily_update(String daily_update) {
+		this.daily_update = daily_update;
+	}
+	public String getLast_update() {
+		return last_update;
+	}
+	public void setLast_update(String last_update) {
+		this.last_update = last_update;
+	}
+	public String getIssuer_id() {
+		return issuer_id;
+	}
+	public void setIssuer_id(String issuer_id) {
+		this.issuer_id = issuer_id;
+	}
+	public String getIssuer_name() {
+		return issuer_name;
+	}
+	public void setIssuer_name(String issuer_name) {
+		this.issuer_name = issuer_name;
+	}
+	public String getIssuer_amount() {
+		return issuer_amount;
+	}
+	public void setIssuer_amount(String issuer_amount) {
+		this.issuer_amount = issuer_amount;
+	}
+	public String getDividend_frequency() {
+		return dividend_frequency;
+	}
+	public void setDividend_frequency(String dividend_frequency) {
+		this.dividend_frequency = dividend_frequency;
+	}
+	public String getLot_size() {
+		return lot_size;
+	}
+	public void setLot_size(String lot_size) {
+		this.lot_size = lot_size;
+	}
+	public String getTicker_id() {
+		return ticker_id;
+	}
+	public void setTicker_id(String ticker_id) {
+		this.ticker_id = ticker_id;
+	}
+	public String getFundamental_currency() {
+		return fundamental_currency;
+	}
+	public void setFundamental_currency(String fundamental_currency) {
+		this.fundamental_currency = fundamental_currency;
+	}
+	@Override
+	public String toString() {
+		return "StockTickerBean [INTERNAL_CODE=" + INTERNAL_CODE + ", instrument_id=" + instrument_id + ", name=" + name + ", quote_percent=" + quote_percent + ", issuer_id=" + issuer_id
+				+ ", issuer_name=" + issuer_name + ", issuer_amount=" + issuer_amount + ", dividend_frequency=" + dividend_frequency + ", lot_size=" + lot_size + ", provider_id=" + provider_id
+				+ ", provider_name=" + provider_name + ", ticker=" + ticker + ", ticker_id=" + ticker_id + ", provider_market_name=" + provider_market_name + ", mic_id=" + mic_id + ", mic_code="
+				+ mic_code + ", ACRONYM=" + ACRONYM + ", description=" + description + ", city=" + city + ", payment_currency=" + payment_currency + ", fundamental_currency=" + fundamental_currency
+				+ ", update_frequency=" + update_frequency + ", quotation_factor=" + quotation_factor + ", first_quote=" + first_quote + ", last_quote=" + last_quote + ", start_date=" + start_date
+				+ ", daily_update=" + daily_update + ", last_update=" + last_update + "]";
 	}
 	
 }
