@@ -1,5 +1,7 @@
 package org.jquant.data.louxor;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.jquant.core.Candle;
@@ -36,19 +38,29 @@ public class LouxorCandleReader implements ICandleReader {
 
 
 	public CandleSerie fetchAllCandle(String instrumentId) throws MarketDataReaderException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Candle> candleList = null;
+		// TODO LOAD Daily CANDLES from database 
+		
+		CandleSerie serie = new CandleSerie(candleList);
+		
+		return serie;
 	}
 
 
 	public CandleSerie fetchAllCandle(String instrumentId, DateTime start, DateTime end) throws MarketDataReaderException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Candle> candleList = null;
+		// TODO LOAD Daily CANDLES from database from to  
+		
+		CandleSerie serie = new CandleSerie(candleList);
+		
+		return serie;
 	}
 
 
 	public Candle fetchCandle(String instrumentId, DateTime date) throws MarketDataReaderException {
-		// TODO Auto-generated method stub
+		
+		// TODO LOAD Daily CANDLES from database @ 
 		return null;
 	}
 	
