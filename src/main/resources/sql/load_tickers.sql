@@ -1,0 +1,1 @@
+LOAD DATA LOCAL INFILE 'd:/loux/tickers/stock-clean.txt' into table TICKER_STOCK fields terminated by ',' enclosed by '"' lines terminated by '\n';
