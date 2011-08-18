@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
-import org.jquant.core.Candle;
 import org.jquant.data.reader.ICandleReader;
 import org.jquant.exception.MarketDataReaderException;
+import org.jquant.model.Candle;
 import org.jquant.serie.CandleSerie;
 import org.springframework.stereotype.Service;
 /**

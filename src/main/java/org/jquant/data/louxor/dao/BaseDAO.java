@@ -73,7 +73,7 @@ public abstract class BaseDAO<T extends Object, PK extends Serializable> extends
 	 */
 	@SuppressWarnings("unchecked")
 	public T load(final PK primaryKey) {
-		return (T) getHibernateTemplate().load(this.objectClass, primaryKey);
+		return getHibernateTemplate().load(this.objectClass, primaryKey);
 	}
 
 	/*
@@ -92,7 +92,7 @@ public abstract class BaseDAO<T extends Object, PK extends Serializable> extends
 	 */
 	@SuppressWarnings("unchecked")
 	public T get(final PK primaryKey) {
-		return (T) getHibernateTemplate().get(this.objectClass, primaryKey);
+		return getHibernateTemplate().get(this.objectClass, primaryKey);
 	}
 
 	/*
@@ -242,7 +242,6 @@ public abstract class BaseDAO<T extends Object, PK extends Serializable> extends
 	 * @see nc.gouv.pac.commons.dao.base.IBaseDAO#flush()
 	 */
 	public void flush() {
-		// getHibernateTemplate().flush();
 		getSession().flush();
 	}
 

@@ -3,6 +3,11 @@ package org.jquant.data.louxor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Identifiant pour un {@link StockCandle}
+ * @author patrick.merheb
+ *
+ */
 public class CandleId implements Serializable{
 	/**
 	 * 
@@ -10,12 +15,15 @@ public class CandleId implements Serializable{
 	private static final long serialVersionUID = 5493942907987462064L;
 	
 	
-	private Integer tickerId;
+	private String tickerId;
 	private Date timestamp;
-	public Integer getTickerId() {
+	
+	
+	
+	public String getTickerId() {
 		return tickerId;
 	}
-	public void setTickerId(Integer tickerId) {
+	public void setTickerId(String tickerId) {
 		this.tickerId = tickerId;
 	}
 	public Date getTimestamp() {
