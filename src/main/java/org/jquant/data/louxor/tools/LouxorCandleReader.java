@@ -10,19 +10,11 @@ import org.jquant.model.Candle;
 import org.jquant.serie.CandleSerie;
 import org.springframework.stereotype.Service;
 /**
- * This class is at the hedge of the DATA/SERVICE layers.<br>
- * It's a provider specific TimeSerie reader <br>
+ * Louxor specific TimeSerie reader
+ * <p> 
  * Fetch methods transforms the List/Vector of TimeValues (Quote,Rate,Candle) 
  * in TIME INDEXED TimeSeries 
  * 
- * It enables an abstraction level with the data provider (Louxor/Yahoo/IB/TENFORE etc...)
- * A specific LOOKUP mechanism has to be implemented for each DataProviders
- * <ul>
- * <li>Load Data from Data Layer</li>
- * <li>eventually apply transformations on the Transfer Objects List </li>
- * <li>Build the TimeSerie </li>
- * 
- * </ul>
  * @author merhebp
  *
  */

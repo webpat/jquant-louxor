@@ -14,7 +14,7 @@ import javax.persistence.Table;
  *	Le ticker Louxor pour un ETF   
  */
 @Entity
-@Table(name = "TICKER_STOCK")
+@Table(name = "TICKER_FUTURE")
 public class FutureTicker extends AbstractTicker {
 
 
