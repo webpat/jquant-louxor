@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.jquant.data.louxor.dao.StockCandleDAO;
 import org.jquant.data.louxor.model.StockCandle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 /**
  * Louxor specific MarketData Reader
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author patrick.merheb
  *
  */
-@Service
+@Repository
 public class MarketDataReader {
 	
 	@Autowired
