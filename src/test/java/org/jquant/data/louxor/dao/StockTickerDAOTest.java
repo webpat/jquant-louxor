@@ -48,9 +48,9 @@ public class StockTickerDAOTest {
 	@Test
 	public void testGetByIsin(){
 		String isin = "JP3160400002";
-		String mic = "XTKS";	
+//		String mic = "XTKS";	
 		
-		StockTicker ticker = dao.findByISIN(isin, mic, LouxorProvider.BLOOMBERG);
+		StockTicker ticker = dao.findByISIN(isin, LouxorProvider.BLOOMBERG);
 		Assert.assertNotNull(ticker);
 		
 		

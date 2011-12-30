@@ -12,12 +12,13 @@ import org.jquant.model.Symbol;
 import org.jquant.serie.CandleSerie;
 import org.jquant.serie.QuoteSerie;
 import org.jquant.time.calendar.Periods;
+import org.springframework.stereotype.Component;
 
 /**
- * A monter explicitement dans le XML 
+ * Will be instanciated by Spring and used at runtime depending on the Provider reader used 
  * @author patrick.merheb
- *
  */
+@Component
 public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 
 	
@@ -103,19 +104,22 @@ public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 	private CandleSerie assembleCandles(List<StockCandle> histo) {
 		
 		CandleSerie cs = new CandleSerie();
-		for(StockCandle candle : histo){
-			DateTime dt = new DateTime(candle.getTimestamp(), DateTimeZone.getDefault());
-			cs.addValue(dt, 
+	
+		if (histo != null){
+			for(StockCandle candle : histo){
+				DateTime dt = new DateTime(candle.getTimestamp(), DateTimeZone.getDefault());
+				cs.addValue(dt, 
 						new Candle( dt, 
-									Periods.ONE_DAY,
-									candle.getOpen(),
-									candle.getHigh(),
-									candle.getLow(),
-									candle.getClose(),
-									candle.getVolume())
-						);
+								Periods.ONE_DAY,
+								candle.getOpen(),
+								candle.getHigh(),
+								candle.getLow(),
+								candle.getClose(),
+								candle.getVolume())
+				);
+			}
 		}
-		return null;
+		return cs;
 	}
 	
 }
