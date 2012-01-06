@@ -7,8 +7,8 @@ import org.joda.time.DateTimeZone;
 import org.jquant.data.MarketDataReaderAdapter;
 import org.jquant.data.louxor.MarketDataReader;
 import org.jquant.data.louxor.model.StockCandle;
-import org.jquant.model.Candle;
 import org.jquant.model.Symbol;
+import org.jquant.serie.Candle;
 import org.jquant.serie.CandleSerie;
 import org.jquant.serie.QuoteSerie;
 import org.jquant.time.calendar.Periods;
@@ -31,7 +31,7 @@ public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<StockCandle> histo = ((MarketDataReader)reader).readStockCandleHistory(symbol.getCode(), start, end);
+			List<StockCandle> histo = ((MarketDataReader)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
@@ -64,7 +64,7 @@ public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<StockCandle> histo = ((MarketDataReader)reader).readStockCandleHistory(symbol.getCode());
+			List<StockCandle> histo = ((MarketDataReader)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
@@ -108,7 +108,7 @@ public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 		if (histo != null){
 			for(StockCandle candle : histo){
 				DateTime dt = new DateTime(candle.getTimestamp(), DateTimeZone.getDefault());
-				cs.addValue(dt, 
+				cs.addValue( 
 						new Candle( dt, 
 								Periods.ONE_DAY,
 								candle.getOpen(),

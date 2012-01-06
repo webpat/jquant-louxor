@@ -31,26 +31,38 @@ public class MarketDataReader {
 
 	/**
 	 * FIXME : Tri des StockCandle, prendre en compte les dates 
-	 * @param providerCode
+	 * @param providerCode (MSFT, GOOGL ...)
+	 * @param micCode The Mic Code (XPAR, XFRA ...)
 	 * @param start
 	 * @param end
-	 * @return a Collection of {@link StockCandle}
+	 * @return a Collection of {@link StockCandle} or <code>null</code>
 	 */
-	public List<StockCandle> readStockCandleHistory(String providerCode, DateTime start, DateTime end) {
+	public List<StockCandle> readStockCandleHistory(String providerCode,String micCode, DateTime start, DateTime end) {
 		
-		StockTicker ticker = stockTickerDAO.findByISIN(providerCode, LouxorProvider.BLOOMBERG);
-		return stockDAO.findAllByTickerId(ticker.getTickerId());
+		StockTicker ticker = stockTickerDAO.findByISIN(providerCode,micCode, LouxorProvider.BLOOMBERG);
+		
+		if (ticker != null){
+			return stockDAO.findAllByTickerId(ticker.getTickerId());
+		}else {
+			return null;
+		}
 	}
 
 	
 	/**
-	 * 
-	 * @param providerCode
-	 * @return a Collection of {@link StockCandle}
+	 * For Stocks the identifier Code is the ISIN in Louxor 
+	 * @param providerCode (MSFT, GOOGL ...)
+	 * @param micCode The Mic Code (XPAR, XFRA ...)
+	 * @return a Collection of {@link StockCandle} or <code>null</code>
 	 */
-	public List<StockCandle> readStockCandleHistory(String providerCode) {
-		StockTicker ticker = stockTickerDAO.findByISIN(providerCode, LouxorProvider.BLOOMBERG);
-		return stockDAO.findAllByTickerId(ticker.getTickerId());
+	public List<StockCandle> readStockCandleHistory(String providerCode,String micCode) {
+		StockTicker ticker = stockTickerDAO.findByISIN(providerCode, micCode, LouxorProvider.BLOOMBERG);
+		
+		if (ticker != null){
+			return stockDAO.findAllByTickerId(ticker.getTickerId());
+		}else {
+			return null;
+		}
 	}
 
 	
