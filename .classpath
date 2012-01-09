@@ -34,14 +34,6 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/3.0.5.RELEASE/spring-expression-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/3.0.5.RELEASE/spring-orm-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/3.0.5.RELEASE/spring-tx-3.0.5.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-core/4.0-SNAPSHOT/unitils-core-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-database/4.0-SNAPSHOT/unitils-database-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-dataset/4.0-SNAPSHOT/unitils-dataset-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-dbunit/4.0-SNAPSHOT/unitils-dbunit-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-easymock/4.0-SNAPSHOT/unitils-easymock-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-hibernate/4.0-SNAPSHOT/unitils-hibernate-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-inject/4.0-SNAPSHOT/unitils-inject-4.0-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/unitils/unitils-mock/4.0-SNAPSHOT/unitils-mock-4.0-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/3.0.5.RELEASE/spring-test-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-asm/3.0.5.RELEASE/spring-asm-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar"/>
