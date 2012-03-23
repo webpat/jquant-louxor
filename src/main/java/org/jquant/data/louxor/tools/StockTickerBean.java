@@ -36,7 +36,6 @@ public class StockTickerBean {
 	
 	public StockTickerBean() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public String getINTERNAL_CODE() {
 		return INTERNAL_CODE;

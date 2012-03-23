@@ -1,10 +1,7 @@
 package org.jquant.data.louxor.tools;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -58,14 +55,7 @@ public class StockTickerCSVCleaner {
 			
 			writer.flush();
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

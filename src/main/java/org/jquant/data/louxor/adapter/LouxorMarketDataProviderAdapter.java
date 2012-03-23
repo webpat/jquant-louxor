@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.jquant.data.MarketDataReaderAdapter;
+import org.jquant.data.IMarketDataProviderAdapter;
 import org.jquant.data.louxor.MarketDataReader;
 import org.jquant.data.louxor.model.StockCandle;
-import org.jquant.model.Symbol;
+import org.jquant.model.InstrumentId;
 import org.jquant.serie.Candle;
 import org.jquant.serie.CandleSerie;
 import org.jquant.serie.QuoteSerie;
@@ -19,14 +19,14 @@ import org.springframework.stereotype.Component;
  * @author patrick.merheb
  */
 @Component
-public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
+public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapter {
 
 	
 	public boolean supports(Object reader) {
 		return reader instanceof MarketDataReader ;
 	}
 
-	public CandleSerie readCandleSerie(Symbol symbol, DateTime start, DateTime end, Object reader) {
+	public CandleSerie readCandleSerie(InstrumentId symbol, DateTime start, DateTime end, Object reader) {
 		switch (symbol.getType()){
 		case BOND:
 			throw new UnsupportedOperationException();
@@ -59,7 +59,7 @@ public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 	}
 
 
-	public CandleSerie readCandleSerie(Symbol symbol, Object reader) {
+	public CandleSerie readCandleSerie(InstrumentId symbol, Object reader) {
 		switch (symbol.getType()){
 		case BOND:
 			throw new UnsupportedOperationException();
@@ -91,13 +91,11 @@ public class LouxorMarketDataReaderAdapter implements MarketDataReaderAdapter {
 		return null;
 	}
 
-	public QuoteSerie readQuoteSerie(Symbol symbol, Object reader) {
-		// TODO Auto-generated method stub
+	public QuoteSerie readQuoteSerie(InstrumentId symbol, Object reader) {
 		return null;
 	}
 	
-	public QuoteSerie readQuoteSerie(Symbol symbol, DateTime start, DateTime end, Object reader) {
-		// TODO Auto-generated method stub
+	public QuoteSerie readQuoteSerie(InstrumentId symbol, DateTime start, DateTime end, Object reader) {
 		return null;
 	}
 
