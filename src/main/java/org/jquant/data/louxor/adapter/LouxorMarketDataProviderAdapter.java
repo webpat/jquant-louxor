@@ -7,6 +7,7 @@ import org.joda.time.DateTimeZone;
 import org.jquant.data.IMarketDataProviderAdapter;
 import org.jquant.data.louxor.MarketDataReader;
 import org.jquant.data.louxor.model.StockCandle;
+import org.jquant.instrument.GenericFuture;
 import org.jquant.model.InstrumentId;
 import org.jquant.serie.Candle;
 import org.jquant.serie.CandleSerie;
@@ -118,6 +119,12 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 			}
 		}
 		return cs;
+	}
+
+	@Override
+	public GenericFuture readGenericFuture(InstrumentId future, DateTime start, DateTime end, Object reader) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

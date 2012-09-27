@@ -41,12 +41,21 @@ public class StockTicker extends AbstractTicker {
 	private Integer lotSize;
 
 
+	@Column(name="UPDATE_FREQUENCY")
+	private String updateFrequency;
+
+	@Column(name="QUOTATION_FACTOR")
+	private Long quotationFactor;
+	
+	@Column(name="QUOTE_PERCENT")
+	private Boolean quotePercent;
+
 
 	
-	@Column(name="FUNDAMENTAL_CURRENCY")
-	private String fundamentalCurrency;
+	@Column(name="MIC_CODE")
+	private String micCode;
 	
-
+	
 	public StockTicker() {
 	}
 
@@ -93,14 +102,39 @@ public class StockTicker extends AbstractTicker {
 
 	
 
-	public String getFundamentalCurrency() {
-		return this.fundamentalCurrency;
+	public String getUpdateFrequency() {
+		return this.updateFrequency;
 	}
 
-	public void setFundamentalCurrency(String fundamentalCurrency) {
-		this.fundamentalCurrency = fundamentalCurrency;
+	public void setUpdateFrequency(String updateFrequency) {
+		this.updateFrequency = updateFrequency;
 	}
 
+	public Long getQuotationFactor() {
+		return this.quotationFactor;
+	}
+
+	public void setQuotationFactor(Long quotationFactor) {
+		this.quotationFactor = quotationFactor;
+	}
 	
+	
+	public Boolean getQuotePercent() {
+		return this.quotePercent;
+	}
+
+	public void setQuotePercent(Boolean quotePercent) {
+		this.quotePercent = quotePercent;
+	}
+	
+
+	public String getMicCode() {
+		return this.micCode;
+	}
+
+	public void setMicCode(String micCode) {
+		this.micCode = micCode;
+	}
+
 
 }

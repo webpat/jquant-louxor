@@ -4,7 +4,6 @@
 package org.jquant.data.louxor.dao;
 
 
-import org.jquant.data.louxor.model.LouxorProvider;
 import org.jquant.data.louxor.model.StockTicker;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,7 +38,7 @@ public class StockTickerDAOTest {
 		
 		
 		
-		String primaryKey = "1384";
+		String primaryKey = "2276";
 		StockTicker ticker = dao.get(primaryKey);
 		Assert.assertNotNull(ticker);
 		
@@ -50,7 +49,7 @@ public class StockTickerDAOTest {
 		String isin = "JP3160400002";
 		String mic = "XTKS";	
 		
-		StockTicker ticker = dao.findByISIN(isin,mic, LouxorProvider.BLOOMBERG);
+		StockTicker ticker = dao.findByISIN(isin,mic);
 		Assert.assertNotNull(ticker);
 		
 		

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 
 /**
- *  ETFTicker 
+ *  TrackerTicker 
  *	Le ticker Louxor pour un ETF   
  */
 @Entity
@@ -24,40 +24,38 @@ public class FutureTicker extends AbstractTicker {
 	private static final long serialVersionUID = 7850403728859999711L;
 
 	
-
-	@Column(name="ISSUER_ID")
-	private Integer issuerId;
-
-	@Column(name="ISSUER_NAME")
-	private String issuerName;
-
+	@Column(name="FIRST_TRADE_DATE")
+	private Date firstTradeDate;
 	
+	@Column(name="START_DATE")
+	private Date startDate;
+	
+	@Column(name="LAST_TRADE_DATE")
+	private Date lastTradeDate;
+	
+	@Column(name="FIRST_NOTICE_DATE")
+	private Date firstNoticeDate;
+	
+	@Column(name="FIRST_DELIVERY_DATE")
+	private Date firstDeliveryDate;
+	
+	@Column(name="LAST_DELIVERY_DATE")
+	private Date lastDeliveryDate;
+	
+	@Column(name="BASIS_POINT_VALUE")
+	private Integer basisPointValue;
 
+	@Column(name="NOTIONAL_BOND")
+	private String notionalBond;
 	
-	@Column(name="DIVIDEND_FREQUENCY")
-	private String dividendFrequency;
-
-	@Column(name="LOT_SIZE")
-	private Integer lotSize;
-
-	@Column(name="INCEPTION_DATE")
-	private Date inceptionDate;
+	@Column(name="QUOTE_UNITS")
+	private String quoteUnits;
 	
-	@Column(name="REDEMPTION_DATE")
-	private Date redemptionDate;
-
+	@Column(name="SHORT_NAME")
+	private String shortName;
 	
-	@Column(name="FUNDAMENTAL_CURRENCY")
-	private String fundamentalCurrency;
-	
-	@Column(name="MANAGEMENT_COMPANY")
-	private String managementCompany;
-	
-	@Column(name="PARENT_COMPANY_NAME")
-	private String parentCompanyName;
-	
-	@Column(name="REF_INDEX_TICKER")
-	private String refIndexTicker;
+	@Column(name="TICK_SIZE")
+	private Integer tickSize;
 
 	@Column(name="UNDERLYING_INSTRUMENT_ID")
 	private String underlyingInstrumentId;
@@ -77,113 +75,35 @@ public class FutureTicker extends AbstractTicker {
 	@Column(name="UNDERLYING_TICKER")
 	private String underlyingTicker;
 	
-	@Column(name="UNDERLYING_MIC_ID")
-	private String underlyingMicId;
-	
 	@Column(name="UNDERLYING_MIC_CODE")
 	private String underlyingMicCode;
 	
+	@Column(name="MIC_CODE")
+	private String micCode;
 	
+	@Column(name="UPDATE_FREQUENCY")
+	private String updateFrequency;
+
+	@Column(name="QUOTATION_FACTOR")
+	private Long quotationFactor;
 	
 	public FutureTicker() {
 	}
 
 	
-	public Integer getIssuerId() {
-		return this.issuerId;
-	}
-
-	public void setIssuerId(Integer issuerId) {
-		this.issuerId = issuerId;
-	}
-
-	public String getIssuerName() {
-		return this.issuerName;
-	}
-
-	public void setIssuerName(String issuerName) {
-		this.issuerName = issuerName;
-	}
-
 	
-
-	public String getDividendFrequency() {
-		return this.dividendFrequency;
+	public Integer getTickSize() {
+		return this.tickSize;
 	}
 
-	public void setDividendFrequency(String dividendFrequency) {
-		this.dividendFrequency = dividendFrequency;
-	}
-
-	public Integer getLotSize() {
-		return this.lotSize;
-	}
-
-	public void setLotSize(Integer lotSize) {
-		this.lotSize = lotSize;
+	public void setTickSize(Integer lotSize) {
+		this.tickSize = lotSize;
 	}
 
 	
 
 	
 
-	public String getFundamentalCurrency() {
-		return this.fundamentalCurrency;
-	}
-
-	public void setFundamentalCurrency(String fundamentalCurrency) {
-		this.fundamentalCurrency = fundamentalCurrency;
-	}
-
-
-	public Date getInceptionDate() {
-		return inceptionDate;
-	}
-
-
-	public void setInceptionDate(Date inceptionDate) {
-		this.inceptionDate = inceptionDate;
-	}
-
-
-	public Date getRedemptionDate() {
-		return redemptionDate;
-	}
-
-
-	public void setRedemptionDate(Date redemptionDate) {
-		this.redemptionDate = redemptionDate;
-	}
-
-
-	public String getManagementCompany() {
-		return managementCompany;
-	}
-
-
-	public void setManagementCompany(String managementCompany) {
-		this.managementCompany = managementCompany;
-	}
-
-
-	public String getParentCompanyName() {
-		return parentCompanyName;
-	}
-
-
-	public void setParentCompanyName(String parentCompanyName) {
-		this.parentCompanyName = parentCompanyName;
-	}
-
-
-	public String getRefIndexTicker() {
-		return refIndexTicker;
-	}
-
-
-	public void setRefIndexTicker(String refIndexTicker) {
-		this.refIndexTicker = refIndexTicker;
-	}
 
 
 	public String getUnderlyingInstrumentId() {
@@ -246,15 +166,6 @@ public class FutureTicker extends AbstractTicker {
 	}
 
 
-	public String getUnderlyingMicId() {
-		return underlyingMicId;
-	}
-
-
-	public void setUnderlyingMicId(String underlyingMicId) {
-		this.underlyingMicId = underlyingMicId;
-	}
-
 
 	public String getUnderlyingMicCode() {
 		return underlyingMicCode;
@@ -263,6 +174,162 @@ public class FutureTicker extends AbstractTicker {
 
 	public void setUnderlyingMicCode(String underlyingMicCode) {
 		this.underlyingMicCode = underlyingMicCode;
+	}
+
+
+
+	public Date getFirstTradeDate() {
+		return firstTradeDate;
+	}
+
+
+
+	public void setFirstTradeDate(Date firstTradeDate) {
+		this.firstTradeDate = firstTradeDate;
+	}
+
+
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+
+
+	public Date getLastTradeDate() {
+		return lastTradeDate;
+	}
+
+
+
+	public void setLastTradeDate(Date lastTradeDate) {
+		this.lastTradeDate = lastTradeDate;
+	}
+
+
+
+	public Date getFirstNoticeDate() {
+		return firstNoticeDate;
+	}
+
+
+
+	public void setFirstNoticeDate(Date firstNoticeDate) {
+		this.firstNoticeDate = firstNoticeDate;
+	}
+
+
+
+	public Date getFirstDeliveryDate() {
+		return firstDeliveryDate;
+	}
+
+
+
+	public void setFirstDeliveryDate(Date firstDeliveryDate) {
+		this.firstDeliveryDate = firstDeliveryDate;
+	}
+
+
+
+	public Date getLastDeliveryDate() {
+		return lastDeliveryDate;
+	}
+
+
+
+	public void setLastDeliveryDate(Date lastDeliveryDate) {
+		this.lastDeliveryDate = lastDeliveryDate;
+	}
+
+
+
+	public Integer getBasisPointValue() {
+		return basisPointValue;
+	}
+
+
+
+	public void setBasisPointValue(Integer basisPointValue) {
+		this.basisPointValue = basisPointValue;
+	}
+
+
+
+	public String getNotionalBond() {
+		return notionalBond;
+	}
+
+
+
+	public void setNotionalBond(String notionalBond) {
+		this.notionalBond = notionalBond;
+	}
+
+
+
+	public String getQuoteUnits() {
+		return quoteUnits;
+	}
+
+
+
+	public void setQuoteUnits(String quoteUnits) {
+		this.quoteUnits = quoteUnits;
+	}
+
+
+
+	public String getShortName() {
+		return shortName;
+	}
+
+
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+
+
+	public String getMicCode() {
+		return micCode;
+	}
+
+
+
+	public void setMicCode(String micCode) {
+		this.micCode = micCode;
+	}
+
+
+
+	public String getUpdateFrequency() {
+		return updateFrequency;
+	}
+
+
+
+	public void setUpdateFrequency(String updateFrequency) {
+		this.updateFrequency = updateFrequency;
+	}
+
+
+
+	public Long getQuotationFactor() {
+		return quotationFactor;
+	}
+
+
+
+	public void setQuotationFactor(Long quotationFactor) {
+		this.quotationFactor = quotationFactor;
 	}
 
 	

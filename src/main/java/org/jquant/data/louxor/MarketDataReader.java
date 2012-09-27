@@ -5,7 +5,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.jquant.data.louxor.dao.StockCandleDAO;
 import org.jquant.data.louxor.dao.StockTickerDAO;
-import org.jquant.data.louxor.model.LouxorProvider;
 import org.jquant.data.louxor.model.StockCandle;
 import org.jquant.data.louxor.model.StockTicker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class MarketDataReader {
 	 */
 	public List<StockCandle> readStockCandleHistory(String providerCode,String micCode, DateTime start, DateTime end) {
 		
-		StockTicker ticker = stockTickerDAO.findByISIN(providerCode,micCode, LouxorProvider.BLOOMBERG);
+		StockTicker ticker = stockTickerDAO.findByISIN(providerCode,micCode);
 		
 		if (ticker != null){
 			return stockDAO.findAllByTickerId(ticker.getTickerId());
@@ -56,7 +55,7 @@ public class MarketDataReader {
 	 * @return a Collection of {@link StockCandle} or <code>null</code>
 	 */
 	public List<StockCandle> readStockCandleHistory(String providerCode,String micCode) {
-		StockTicker ticker = stockTickerDAO.findByISIN(providerCode, micCode, LouxorProvider.BLOOMBERG);
+		StockTicker ticker = stockTickerDAO.findByISIN(providerCode, micCode);
 		
 		if (ticker != null){
 			return stockDAO.findAllByTickerId(ticker.getTickerId());

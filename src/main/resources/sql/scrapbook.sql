@@ -27,3 +27,5 @@ select min(timestamp) as debut, max(timestamp) as fin from candle_stock where in
 
 -- Recherche des dates de début et de fin d'historique pour le stock US4592001014 (IBM)
 select min(timestamp) as debut, max(timestamp) as fin from candle_stock where internal_code='US4592001014'
+
+select * from ticker_stock where ticker_id='1394' 
