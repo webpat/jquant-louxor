@@ -5,7 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.jquant.data.IMarketDataProviderAdapter;
-import org.jquant.data.louxor.MarketDataReader;
+import org.jquant.data.louxor.LouxorMarketDataService;
 import org.jquant.data.louxor.model.StockCandle;
 import org.jquant.instrument.GenericFuture;
 import org.jquant.model.InstrumentId;
@@ -24,7 +24,7 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 
 	
 	public boolean supports(Object reader) {
-		return reader instanceof MarketDataReader ;
+		return reader instanceof LouxorMarketDataService ;
 	}
 
 	public CandleSerie readCandleSerie(InstrumentId symbol, DateTime start, DateTime end, Object reader) {
@@ -32,7 +32,7 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<StockCandle> histo = ((MarketDataReader)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
+			List<StockCandle> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
@@ -65,7 +65,7 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<StockCandle> histo = ((MarketDataReader)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
+			List<StockCandle> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();

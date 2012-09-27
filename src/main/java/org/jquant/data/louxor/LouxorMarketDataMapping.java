@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class LouxorMarketDataMapping implements IMarketDataProviderMapping {
 
 	@Autowired
-	MarketDataReader reader;
+	LouxorMarketDataService reader;
 	
 	public Object getReader(JQuantDataProvider provider) {
 		if ( JQuantDataProvider.LOUXOR.equals(provider)){
