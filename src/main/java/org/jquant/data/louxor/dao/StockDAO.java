@@ -5,7 +5,7 @@ package org.jquant.data.louxor.dao;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.jquant.data.louxor.model.StockCandle;
+import org.jquant.data.louxor.model.CandleDTO;
 import org.jquant.data.louxor.model.StockTicker;
 import org.springframework.stereotype.Repository;
 
@@ -44,11 +44,13 @@ public class StockDAO extends BaseDAO<StockTicker,String> {
 	 * @return une {@link List} de {@link CandleDTO} appartenant tous au Ticker identifié par tickerId
 	 */
 	@SuppressWarnings("unchecked")
-	public List<StockCandle> findAllCandleByTickerId(String tickerId){
+	public List<CandleDTO> findAllCandleByTickerId(String tickerId){
 		
-		String hqlQueryString = "from StockCandle sc where sc.tickerId = :tickerId";
-		Query query = getSession().createQuery(hqlQueryString)
-								.setParameter("tickerId", tickerId);
+		String sqlQueryString = "select * from candle_stock cs where cs.ticker_id = :tickerId";
+		Query query = getSession()
+					.createSQLQuery(sqlQueryString)
+					.addEntity(CandleDTO.class)
+					.setParameter("tickerId", tickerId);
 		
 		return query.list();
 	}

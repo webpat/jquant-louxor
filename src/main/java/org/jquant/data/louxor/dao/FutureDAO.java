@@ -1,17 +1,23 @@
 package org.jquant.data.louxor.dao;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.joda.time.DateTime;
-import org.jquant.data.louxor.model.FutureCandle;
+import org.jquant.data.louxor.model.CandleDTO;
 import org.jquant.data.louxor.model.FutureTicker;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class FutureDAO extends BaseDAO<FutureTicker, String> {
 
+	DateFormatSymbols dfs = DateFormatSymbols.getInstance(Locale.US);
+	String[] monthNames = dfs.getShortMonths();
+	
 	public FutureDAO() {
 		super(FutureTicker.class);
 	}
@@ -28,7 +34,7 @@ public class FutureDAO extends BaseDAO<FutureTicker, String> {
 	 * @return une Collection de {@link FutureTicker}
 	 */
 	@SuppressWarnings("unchecked")
-	public List<FutureTicker> findAllByExactName(String name,String  micCode,DateTime start, DateTime end){
+	public List<FutureTicker> findAll(String name,String  micCode,DateTime start, DateTime end){
 		String hqlQueryString = "from FutureTicker ft where ft.shortName = :name  and ft.micCode = :mic " +
 								"and firstDeliveryDate != null and ft.firstQuote >= :start and ft.lastQuote <= :end order by firstDeliveryDate asc";
 		Query query = getSession().createQuery(hqlQueryString)
@@ -46,11 +52,13 @@ public class FutureDAO extends BaseDAO<FutureTicker, String> {
 	 * @return une {@link List} de {@link CandleDTO} appartenant tous au Ticker identifié par tickerId
 	 */
 	@SuppressWarnings("unchecked")
-	public List<FutureCandle> findAllCandleByTickerId(String tickerId){
+	public List<CandleDTO> findAllCandleByTickerId(String tickerId){
 		
-		String hqlQueryString = "from FutureCandle fc where fc.tickerId = :tickerId";
-		Query query = getSession().createQuery(hqlQueryString)
-								.setParameter("tickerId", tickerId);
+		String sqlQueryString = "select * from candle_future cf where cf.ticker_id = :tickerId";
+		Query query = getSession()
+					.createSQLQuery(sqlQueryString)
+					.addEntity(CandleDTO.class)
+					.setParameter("tickerId", tickerId);
 		
 		return query.list();
 	}
@@ -64,8 +72,15 @@ public class FutureDAO extends BaseDAO<FutureTicker, String> {
 	 * @return {@link FutureTicker}
 	 */
 	public FutureTicker find(String name, String micCode, Integer year, Integer month) {
-		// TODO Bananananana
-		return null;
+		String hqlQueryString = "from FutureTicker ft where ft.name = :name  and ft.micCode = :mic " +
+				"and firstDeliveryDate != null";
+		
+		
+		Query query = getSession().createQuery(hqlQueryString)
+				.setParameter("mic", micCode)
+				.setParameter("name", name + " ("+micCode+") " + monthNames[month-1]+ StringUtils.substring(String.valueOf(year),2) );
+
+		return (FutureTicker) query.uniqueResult();
 	}
 
 }

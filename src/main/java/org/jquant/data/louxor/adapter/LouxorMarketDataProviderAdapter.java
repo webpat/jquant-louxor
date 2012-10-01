@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.jquant.data.IMarketDataProviderAdapter;
 import org.jquant.data.louxor.LouxorMarketDataService;
-import org.jquant.data.louxor.model.StockCandle;
+import org.jquant.data.louxor.model.CandleDTO;
 import org.jquant.instrument.GenericFuture;
 import org.jquant.model.InstrumentId;
 import org.jquant.serie.Candle;
@@ -32,7 +32,7 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<StockCandle> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
+			List<CandleDTO> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
@@ -65,7 +65,7 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<StockCandle> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
+			List<CandleDTO> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
@@ -100,12 +100,12 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		return null;
 	}
 
-	private CandleSerie assembleCandles(List<StockCandle> histo) {
+	private CandleSerie assembleCandles(List<CandleDTO> histo) {
 		
 		CandleSerie cs = new CandleSerie();
 	
 		if (histo != null){
-			for(StockCandle candle : histo){
+			for(CandleDTO candle : histo){
 				DateTime dt = new DateTime(candle.getTimestamp(), DateTimeZone.getDefault());
 				cs.addValue( 
 						new Candle( dt, 

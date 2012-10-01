@@ -3,25 +3,42 @@ package org.jquant.data.louxor.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@IdClass(CandleId.class)
 public class CandleDTO implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7564788412838997397L;
-
+	private static final long serialVersionUID = 2393041434146158772L;
+	
+	
+	@Id
+	@Column(name="TICKER_ID")
 	private String tickerId;
 
 	private String name;
 	
+	@Column(name="INTERNAL_CODE")
 	private String internalCode;
 
 	private String ticker;
 
+	@Column(name="MIC_CODE")
 	private String micCode;
 
+	@Column(name="PAYMENT_CURRENCY")
 	private String paymentCurrency;
 
+	@Id
 	private Date timestamp;
 
 	private Long open;
@@ -36,6 +53,10 @@ public class CandleDTO implements Serializable {
 
 	private Long vwap;
 
+	@Column(name="OPEN_INTEREST")
+	private Long openInterest;
+	
+
 	public String getTickerId() {
 		return tickerId;
 	}
@@ -44,8 +65,9 @@ public class CandleDTO implements Serializable {
 		this.tickerId = tickerId;
 	}
 
+
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -53,7 +75,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public String getInternalCode() {
-		return internalCode;
+		return this.internalCode;
 	}
 
 	public void setInternalCode(String internalCode) {
@@ -61,7 +83,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public String getTicker() {
-		return ticker;
+		return this.ticker;
 	}
 
 	public void setTicker(String ticker) {
@@ -69,7 +91,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public String getMicCode() {
-		return micCode;
+		return this.micCode;
 	}
 
 	public void setMicCode(String micCode) {
@@ -77,7 +99,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public String getPaymentCurrency() {
-		return paymentCurrency;
+		return this.paymentCurrency;
 	}
 
 	public void setPaymentCurrency(String paymentCurrency) {
@@ -85,7 +107,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Date getTimestamp() {
-		return timestamp;
+		return this.timestamp;
 	}
 
 	public void setTimestamp(Date timestamp) {
@@ -93,7 +115,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Long getOpen() {
-		return open;
+		return this.open;
 	}
 
 	public void setOpen(Long open) {
@@ -101,7 +123,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Long getHigh() {
-		return high;
+		return this.high;
 	}
 
 	public void setHigh(Long high) {
@@ -109,7 +131,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Long getLow() {
-		return low;
+		return this.low;
 	}
 
 	public void setLow(Long low) {
@@ -117,7 +139,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Long getClose() {
-		return close;
+		return this.close;
 	}
 
 	public void setClose(Long close) {
@@ -125,7 +147,7 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Integer getVolume() {
-		return volume;
+		return this.volume;
 	}
 
 	public void setVolume(Integer volume) {
@@ -133,13 +155,26 @@ public class CandleDTO implements Serializable {
 	}
 
 	public Long getVwap() {
-		return vwap;
+		return this.vwap;
 	}
 
 	public void setVwap(Long vwap) {
 		this.vwap = vwap;
 	}
-	
-	
-	
+
+	public Long getOpenInterest() {
+		return this.openInterest;
+	}
+
+	public void setOpenInterest(Long openInterest) {
+		this.openInterest = openInterest;
+	}
+
+	@Override
+	public String toString() {
+		return "Candle [timestamp=" + timestamp + ", open=" + open + ", high=" + high + ", low=" + low + ", close=" + close + ", volume=" + volume + "]";
+	}
+
+
+
 }

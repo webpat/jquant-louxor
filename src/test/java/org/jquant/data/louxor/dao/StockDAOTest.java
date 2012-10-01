@@ -3,7 +3,7 @@ package org.jquant.data.louxor.dao;
 
 import java.util.List;
 
-import org.jquant.data.louxor.model.StockCandle;
+import org.jquant.data.louxor.model.CandleDTO;
 import org.jquant.data.louxor.model.StockTicker;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class StockDAOTest {
 	@Test
 	public void testFindAllCandleByTickerId(){
 		String tickerId = "97461";
-		List<StockCandle> result = dao.findAllCandleByTickerId(tickerId);
+		List<CandleDTO> result = dao.findAllCandleByTickerId(tickerId);
 		Assert.assertTrue(result.size()>1);
 	}
 	
