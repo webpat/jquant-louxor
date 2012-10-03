@@ -1,4 +1,4 @@
-package org.jquant.data.louxor.tools;
+package org.louxor.tools;
 
 /**
  *  --TICKER_ID,NAME,INTERNAL_CODE,TICKER,MIC_CODE,PAYMENT_CURRENCY,TIMESTAMP,OPEN,HIGH,LOW,CLOSE,VOLUME,VWAP,OPEN_INTEREST

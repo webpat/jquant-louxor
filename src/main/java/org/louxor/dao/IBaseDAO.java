@@ -1,4 +1,4 @@
-package org.jquant.data.louxor.dao;
+package org.louxor.dao;
 
 
 import java.io.Serializable;

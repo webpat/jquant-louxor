@@ -3,12 +3,14 @@ package org.jquant.data.louxor.dao;
 
 import java.util.List;
 
-import org.jquant.data.louxor.model.CandleDTO;
-import org.jquant.data.louxor.model.StockTicker;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.louxor.dao.StockDAO;
+import org.louxor.model.CandleDTO;
+import org.louxor.model.StockTicker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -40,6 +42,15 @@ public class StockDAOTest {
 		StockTicker ticker = dao.get(primaryKey);
 		Assert.assertNotNull(ticker);
 		
+	}
+	
+	@Test
+	public void testFindTickerIdByIsin(){
+	
+		String isin = "JP3160400002";
+		String mic = "XTKS";	
+		String tickerId = dao.findTickerIdByISIN(isin, mic);
+		Assert.assertTrue(StringUtils.isNotBlank(tickerId));
 	}
 	
 	@Test

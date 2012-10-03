@@ -1,12 +1,13 @@
-package org.jquant.data.louxor.dao;
+package org.louxor.dao;
 
 
 
 import java.util.List;
 
 import org.hibernate.Query;
-import org.jquant.data.louxor.model.CandleDTO;
-import org.jquant.data.louxor.model.StockTicker;
+import org.hibernate.type.StringType;
+import org.louxor.model.CandleDTO;
+import org.louxor.model.StockTicker;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -36,6 +37,22 @@ public class StockDAO extends BaseDAO<StockTicker,String> {
 								.setParameter("isin", isin);
 		
 		return (StockTicker) query.uniqueResult();
+	}
+	
+	/**
+	 * Le code interne de Louxor pour les stocks est l'ISIN 
+	 * @param isin L'identifiant ISIN du Stock
+	 * @param micCode Le code MIC du marché sur lequel est côté l'instrument
+	 * @return {@link String} le tickerId du stock recheché 
+	 */
+	public String findTickerIdByISIN(String isin,String  micCode){
+		String sqlQueryString = "select ts.ticker_id from ticker_stock ts where ts.internal_code = :isin and ts.mic_code = :mic";
+		Query query = getSession().createSQLQuery(sqlQueryString)
+								.addScalar("ticker_id", StringType.INSTANCE)
+								.setParameter("mic", micCode)
+								.setParameter("isin", isin);
+		
+		return (String) query.uniqueResult();
 	}
 	
 	/**

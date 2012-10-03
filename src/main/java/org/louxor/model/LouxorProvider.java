@@ -1,4 +1,4 @@
-package org.jquant.data.louxor.model;
+package org.louxor.model;
 
 public enum LouxorProvider {
 

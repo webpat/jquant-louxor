@@ -1,4 +1,4 @@
-package org.jquant.data.louxor.model;
+package org.louxor.model;
 
 // Generated 1 juil. 2011 17:52:26 by Hibernate Tools 3.4.0.CR1
 

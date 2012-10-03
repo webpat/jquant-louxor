@@ -5,14 +5,18 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.jquant.data.IMarketDataProviderAdapter;
-import org.jquant.data.louxor.LouxorMarketDataService;
-import org.jquant.data.louxor.model.CandleDTO;
+import org.jquant.data.JQuantDataProvider;
+import org.jquant.data.louxor.LouxorFacade;
+import org.jquant.instrument.Future;
 import org.jquant.instrument.GenericFuture;
 import org.jquant.model.InstrumentId;
+import org.jquant.model.InstrumentType;
 import org.jquant.serie.Candle;
 import org.jquant.serie.CandleSerie;
 import org.jquant.serie.QuoteSerie;
 import org.jquant.time.calendar.Periods;
+import org.louxor.model.CandleDTO;
+import org.louxor.model.FutureTicker;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,26 +24,29 @@ import org.springframework.stereotype.Component;
  * @author patrick.merheb
  */
 @Component
-public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapter {
+public class LouxorAdapter implements IMarketDataProviderAdapter {
 
 	
 	public boolean supports(Object reader) {
-		return reader instanceof LouxorMarketDataService ;
+		return reader instanceof LouxorFacade ;
 	}
 
 	public CandleSerie readCandleSerie(InstrumentId symbol, DateTime start, DateTime end, Object reader) {
+		List<CandleDTO> histo;
 		switch (symbol.getType()){
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<CandleDTO> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
+			
+			histo = ((LouxorFacade)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
-			throw new UnsupportedOperationException();
+			histo = ((LouxorFacade)reader).readFutureCandleHistoryByName(symbol.getCode());
+			return assembleCandles(histo);
 		case INDEX:
 			throw new UnsupportedOperationException();
 		case OPTION:
@@ -65,14 +72,15 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<CandleDTO> histo = ((LouxorMarketDataService)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
+			List<CandleDTO> histo = ((LouxorFacade)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
-			throw new UnsupportedOperationException();
+			histo = ((LouxorFacade)reader).readFutureCandleHistoryByName(symbol.getCode());
+			return assembleCandles(histo);
 		case INDEX:
 			throw new UnsupportedOperationException();
 		case OPTION:
@@ -100,6 +108,25 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		return null;
 	}
 
+	
+
+	@Override
+	public GenericFuture readGenericFuture(InstrumentId future, DateTime start, DateTime end, Object reader) {
+	
+		GenericFuture gf = new GenericFuture(future);
+		List<FutureTicker> futures = ((LouxorFacade)reader).findAllFutureByShortName(future.getCode(), future.getExchange().getCode(), start, end);
+		
+		for (FutureTicker ticker : futures){
+			List<CandleDTO> candles = ((LouxorFacade)reader).readFutureCandleHistoryByTickerId(ticker.getTickerId());
+			Future fut = new Future(new InstrumentId(JQuantDataProvider.LOUXOR, ticker.getShortName(), InstrumentType.FUTURE, future.getExchange(), future.getCurrency()));
+			CandleSerie serie = assembleCandles(candles);
+			gf.add(fut, serie);
+		}
+		
+		
+		return gf;
+	}
+	
 	private CandleSerie assembleCandles(List<CandleDTO> histo) {
 		
 		CandleSerie cs = new CandleSerie();
@@ -120,11 +147,4 @@ public class LouxorMarketDataProviderAdapter implements IMarketDataProviderAdapt
 		}
 		return cs;
 	}
-
-	@Override
-	public GenericFuture readGenericFuture(InstrumentId future, DateTime start, DateTime end, Object reader) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

@@ -1,4 +1,4 @@
-package org.jquant.data.louxor.tools;
+package org.louxor.tools;
 
 public class StockTickerBean {
 

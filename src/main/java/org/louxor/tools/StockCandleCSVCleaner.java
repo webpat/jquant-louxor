@@ -1,4 +1,4 @@
-package org.jquant.data.louxor.tools;
+package org.louxor.tools;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
