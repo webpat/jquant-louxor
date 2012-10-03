@@ -39,7 +39,7 @@ public abstract class BaseDAO<T extends Object, PK extends Serializable> extends
 	 * Initialise la {@link SessionFactory}.
 	 * 
 	 * @param sessionFactory
-	 *            La session factory d'Hibernate (donnée par Spring).
+	 *            La session factory d'Hibernate (injectée par Spring).
 	 */
 	@Autowired
 	public void initSessionFactory(
@@ -71,7 +71,6 @@ public abstract class BaseDAO<T extends Object, PK extends Serializable> extends
 	 * 
 	 * @see nc.gouv.pac.commons.dao.base.IBaseDAO#load(java.io.Serializable)
 	 */
-	@SuppressWarnings("unchecked")
 	public T load(final PK primaryKey) {
 		return getHibernateTemplate().load(this.objectClass, primaryKey);
 	}
@@ -90,7 +89,6 @@ public abstract class BaseDAO<T extends Object, PK extends Serializable> extends
 	 * 
 	 * @see nc.gouv.pac.commons.dao.base.IBaseDAO#get(java.io.Serializable)
 	 */
-	@SuppressWarnings("unchecked")
 	public T get(final PK primaryKey) {
 		return getHibernateTemplate().get(this.objectClass, primaryKey);
 	}

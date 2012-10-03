@@ -37,7 +37,7 @@
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties" ref="hibernateProperties"/>
-		<property name="packagesToScan" value="/org/jquant/data/louxor" />
+		<property name="packagesToScan" value="/org/louxor/model" />
 
 	</bean>
 	

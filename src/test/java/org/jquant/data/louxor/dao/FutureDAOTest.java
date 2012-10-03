@@ -40,6 +40,9 @@ public class FutureDAOTest {
 	public void testFindAllCandleByTickerId() {
 		List<CandleDTO> candles = dao.findAllCandleByTickerId("34020");
 		Assert.assertTrue(candles.get(0).getHigh()>0);
+		for (CandleDTO candle: candles){
+			Assert.assertTrue(candle.getHigh()>=candle.getLow());
+		}
 		
 	}
 

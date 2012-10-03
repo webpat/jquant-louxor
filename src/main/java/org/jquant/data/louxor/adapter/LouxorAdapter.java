@@ -11,6 +11,7 @@ import org.jquant.instrument.Future;
 import org.jquant.instrument.GenericFuture;
 import org.jquant.model.InstrumentId;
 import org.jquant.model.InstrumentType;
+import org.jquant.model.StitchingMethod;
 import org.jquant.serie.Candle;
 import org.jquant.serie.CandleSerie;
 import org.jquant.serie.QuoteSerie;
@@ -119,10 +120,15 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		for (FutureTicker ticker : futures){
 			List<CandleDTO> candles = ((LouxorFacade)reader).readFutureCandleHistoryByTickerId(ticker.getTickerId());
 			Future fut = new Future(new InstrumentId(JQuantDataProvider.LOUXOR, ticker.getShortName(), InstrumentType.FUTURE, future.getExchange(), future.getCurrency()));
+			fut.setLastDeliveryDate(ticker.getLastDeliveryDate());
+			fut.setFirstDeliveryDate(ticker.getFirstDeliveryDate());
 			CandleSerie serie = assembleCandles(candles);
 			gf.add(fut, serie);
 		}
 		
+		
+		gf.stitch(StitchingMethod.RETURN_ADJUSTED);
+			
 		
 		return gf;
 	}

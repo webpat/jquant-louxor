@@ -31,6 +31,9 @@ public class StockDAOTest {
 		String tickerId = "97461";
 		List<CandleDTO> result = dao.findAllCandleByTickerId(tickerId);
 		Assert.assertTrue(result.size()>1);
+		for (CandleDTO candle: result){
+			Assert.assertTrue(candle.getHigh()>=candle.getLow());
+		}
 	}
 	
 	@Test
