@@ -38,15 +38,14 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			
-			histo = ((LouxorFacade)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
+			histo = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
-			histo = ((LouxorFacade)reader).readFutureCandleHistoryByName(symbol.getCode());
+			histo = ((LouxorFacade)reader).readFutureDailyHistoryByName(symbol.getCode());
 			return assembleCandles(histo);
 		case INDEX:
 			throw new UnsupportedOperationException();
@@ -57,7 +56,8 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case TIME_DEPOSIT:
 			throw new UnsupportedOperationException();
 		case TRACKER:
-			throw new UnsupportedOperationException();
+			histo = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
+			return assembleCandles(histo);
 		case UNKNOWN:
 			throw new UnsupportedOperationException();
 		case WARRANT:
@@ -73,14 +73,14 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<CandleDTO> histo = ((LouxorFacade)reader).readStockCandleHistory(symbol.getCode(),symbol.getExchange().getCode());
+			List<CandleDTO> histo = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode());
 			return assembleCandles(histo);
 		case FOREX:
 			throw new UnsupportedOperationException();
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
-			histo = ((LouxorFacade)reader).readFutureCandleHistoryByName(symbol.getCode());
+			histo = ((LouxorFacade)reader).readFutureDailyHistoryByName(symbol.getCode());
 			return assembleCandles(histo);
 		case INDEX:
 			throw new UnsupportedOperationException();
@@ -91,7 +91,8 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case TIME_DEPOSIT:
 			throw new UnsupportedOperationException();
 		case TRACKER:
-			throw new UnsupportedOperationException();
+			histo = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
+			return assembleCandles(histo);
 		case UNKNOWN:
 			throw new UnsupportedOperationException();
 		case WARRANT:
@@ -118,7 +119,7 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		List<FutureTicker> futures = ((LouxorFacade)reader).findAllFutureByShortName(future.getCode(), future.getExchange().getCode(), start, end);
 		
 		for (FutureTicker ticker : futures){
-			List<CandleDTO> candles = ((LouxorFacade)reader).readFutureCandleHistoryByTickerId(ticker.getTickerId());
+			List<CandleDTO> candles = ((LouxorFacade)reader).readFutureDailyHistoryByTickerId(ticker.getTickerId());
 			Future fut = new Future(new InstrumentId(JQuantDataProvider.LOUXOR, ticker.getShortName(), InstrumentType.FUTURE, future.getExchange(), future.getCurrency()));
 			fut.setLastDeliveryDate(ticker.getLastDeliveryDate());
 			fut.setFirstDeliveryDate(ticker.getFirstDeliveryDate());

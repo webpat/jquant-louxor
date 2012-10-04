@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.louxor.dao.FutureDAO;
 import org.louxor.dao.StockDAO;
+import org.louxor.dao.TrackerDAO;
 import org.louxor.model.CandleDTO;
 import org.louxor.model.FutureTicker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class LouxorFacade {
 	@Autowired
 	private StockDAO stockDAO;
 	
+	@Autowired
+	private TrackerDAO trackerDAO;
+	
 	
 	@Autowired
 	private FutureDAO futureDAO;
@@ -36,12 +40,12 @@ public class LouxorFacade {
 	 * @param end
 	 * @return a Collection of {@link CandleDTO} or <code>null</code>
 	 */
-	public List<CandleDTO> readStockCandleHistory(String providerCode,String micCode, DateTime start, DateTime end) {
+	public List<CandleDTO> readStockDailyHistory(String providerCode,String micCode, DateTime start, DateTime end) {
 		
 		String tickerId = stockDAO.findTickerIdByISIN(providerCode,micCode);
 		
 		if (tickerId != null){
-			return stockDAO.findAllCandleByTickerId(tickerId); //FIXME : Prise en compte de start et end 
+			return stockDAO.findAllCandleByTickerId(tickerId); 
 		}else {
 			return null;
 		}
@@ -54,11 +58,26 @@ public class LouxorFacade {
 	 * @param micCode The Mic Code (XPAR, XFRA ...)
 	 * @return a Collection of {@link CandleDTO} or <code>null</code>
 	 */
-	public List<CandleDTO> readStockCandleHistory(String providerCode,String micCode) {
+	public List<CandleDTO> readStockDailyHistory(String providerCode,String micCode) {
 		String tickerId = stockDAO.findTickerIdByISIN(providerCode,micCode);
 		
 		if (tickerId != null){
 			return stockDAO.findAllCandleByTickerId(tickerId);
+		}else {
+			return null;
+		}
+	}
+	
+	/**
+	 * For Trackers the identifier Code is the ISIN in Louxor 
+	 * @param providerCode (MSFT, GOOGL ...)
+	 * @return a Collection of {@link CandleDTO} or <code>null</code>
+	 */
+	public List<CandleDTO> readTrackerDailyHistory(String providerCode) {
+		String tickerId = trackerDAO.findTickerIdByISIN(providerCode);
+		
+		if (tickerId != null){
+			return trackerDAO.findAllCandleByTickerId(tickerId);
 		}else {
 			return null;
 		}
@@ -69,7 +88,7 @@ public class LouxorFacade {
 	 * @param name Future Name ex: 'US 30Y BOND (XCBT) Mar78'
 	 * @return a Collection of {@link CandleDTO} or <code>null</code>
 	 */
-	public List<CandleDTO> readFutureCandleHistoryByName(String name) {
+	public List<CandleDTO> readFutureDailyHistoryByName(String name) {
 		
 		String tickerId = futureDAO.findTickerId(name);
 		
@@ -84,7 +103,7 @@ public class LouxorFacade {
 	 * @param tickerId Future tickerId 
 	 * @return a Collection of {@link CandleDTO} or <code>null</code>
 	 */
-	public List<CandleDTO> readFutureCandleHistoryByTickerId(String tickerId) {
+	public List<CandleDTO> readFutureDailyHistoryByTickerId(String tickerId) {
 		
 		
 		if (tickerId != null){
