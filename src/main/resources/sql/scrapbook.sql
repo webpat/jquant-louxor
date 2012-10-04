@@ -90,6 +90,7 @@ where name like '%COPPER%' and first_quote >= str_to_date('1983-06-01', '%Y-%m-%
 order by first_delivery_date asc
 
 
+
 -- Trackers 
 select ticker_id,internal_code,mic_code,name,inception_date,first_quote,last_quote from ticker_tracker where first_quote < str_to_date('2002-01-01', '%Y-%m-%d') ;
 

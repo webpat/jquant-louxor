@@ -126,9 +126,7 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 			gf.add(fut, serie);
 		}
 		
-		
 		gf.stitch(StitchingMethod.RETURN_ADJUSTED);
-			
 		
 		return gf;
 	}
