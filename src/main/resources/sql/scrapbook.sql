@@ -94,3 +94,10 @@ order by first_delivery_date asc
 -- Trackers 
 select ticker_id,internal_code,mic_code,name,inception_date,first_quote,last_quote from ticker_tracker where first_quote < str_to_date('2002-01-01', '%Y-%m-%d') ;
 
+-- Forex Pairs
+
+select ticker_id, name,foreign_currency,payment_currency,first_quote,last_quote,quotation_factor from ticker_forex;
+
+alter table candle_forex add open_interest DECIMAL(10,4);
+alter table candle_forex add volume INT;
+alter table candle_forex add vwap DECIMAL(10,4);
