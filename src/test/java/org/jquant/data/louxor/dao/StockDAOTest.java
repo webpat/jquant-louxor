@@ -39,8 +39,6 @@ public class StockDAOTest {
 	@Test
 	public void testGetByPrimaryKey(){
 		
-		
-		
 		String primaryKey = "2276";
 		StockTicker ticker = dao.get(primaryKey);
 		Assert.assertNotNull(ticker);
