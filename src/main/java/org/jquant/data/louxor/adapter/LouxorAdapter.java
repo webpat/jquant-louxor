@@ -76,7 +76,8 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 			List<CandleDTO> histo = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode());
 			return assembleCandles(histo);
 		case FOREX:
-			throw new UnsupportedOperationException();
+			histo = ((LouxorFacade)reader).readForexDailyHistory(symbol.getCode());
+			return assembleCandles(histo);
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
@@ -93,9 +94,9 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case TRACKER:
 			histo = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
 			return assembleCandles(histo);
-		case UNKNOWN:
-			throw new UnsupportedOperationException();
 		case WARRANT:
+			throw new UnsupportedOperationException();
+		case UNKNOWN:
 			throw new UnsupportedOperationException();
 		
 		}

@@ -2,11 +2,12 @@ select count(*) from candle_stock cs
 inner join ticker_stock ts on ts.ticker_id = cs.ticker_id
 where ts.provider_id = 2;
 
-select count(*) from candle_stock;
+select count(*) from candle_stock where ticker_id = 98368;
 
-select * from ticker_stock where internal_code = 'FR0000130007';
-select * from ticker_stock where internal_code = 'US5949181045' and provider_id='2';
-
+select * from ticker_stock where internal_code = 'US4230741039';
+select * from ticker_stock where internal_code = 'US4592001014';
+select count(*) from ticker_stock where mic_code ='HDG_US';
+select count(*) from ticker_stock;
 
 select * from candle_stock where ticker like 'ALU FP Equity%' order by timestamp asc;
 
@@ -18,6 +19,10 @@ select * from candle_stock where internal_code like 'US4230741039' order by time
 select t.* from (
 	select internal_code,name,mic_code,count(*) as ticks from candle_stock group by internal_code,name,mic_code 
 ) t where ticks<250 order by ticks asc;
+
+select t.* from (
+	select internal_code,name,mic_code,count(*) as ticks from candle_stock group by internal_code,name,mic_code 
+) t where ticks>2500 order by ticks asc;
 
 -- Recherche des dates de début et de fin d'historique pour le stock US4230741039 (Heinz)
 select min(timestamp) as debut, max(timestamp) as fin from candle_stock where internal_code='US4230741039'
@@ -100,4 +105,5 @@ select ticker_id, name,foreign_currency,payment_currency,first_quote,last_quote,
 
 alter table candle_forex add open_interest DECIMAL(10,4);
 alter table candle_forex add volume INT;
+update candle_forex set volume = 0;
 alter table candle_forex add vwap DECIMAL(10,4);

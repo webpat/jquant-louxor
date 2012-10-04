@@ -3,6 +3,7 @@ package org.jquant.data.louxor;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.louxor.dao.ForexDAO;
 import org.louxor.dao.FutureDAO;
 import org.louxor.dao.StockDAO;
 import org.louxor.dao.TrackerDAO;
@@ -28,9 +29,11 @@ public class LouxorFacade {
 	@Autowired
 	private TrackerDAO trackerDAO;
 	
-	
 	@Autowired
 	private FutureDAO futureDAO;
+	
+	@Autowired
+	private ForexDAO forexDAO;
 
 	/**
 	 * FIXME : Tri des StockCandle, prendre en compte les dates 
@@ -99,6 +102,17 @@ public class LouxorFacade {
 		}
 	}
 	
+	public List<CandleDTO> readForexDailyHistory(String name) {
+		String tickerId = forexDAO.findTickerIdByName(name);
+		
+		if (tickerId != null){
+			return forexDAO.findAllCandleByTickerId(tickerId);
+		}else {
+			return null;
+		}
+	}
+	
+	
 	/**
 	 * @param tickerId Future tickerId 
 	 * @return a Collection of {@link CandleDTO} or <code>null</code>
@@ -113,6 +127,7 @@ public class LouxorFacade {
 		}
 	}
 
+	
 	/**
 	 * Returns the list of future tickers with shortName between start and end
 	 * @param shortName
@@ -124,6 +139,9 @@ public class LouxorFacade {
 	public List<FutureTicker> findAllFutureByShortName(String shortName, String micCode, DateTime start, DateTime end){
 		return futureDAO.findAllFuture(shortName, micCode, start, end);
 	}
+
+
+	
 
 	
 	
