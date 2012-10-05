@@ -33,22 +33,25 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 	}
 
 	public CandleSerie readCandleSerie(InstrumentId symbol, DateTime start, DateTime end, Object reader) {
-		List<CandleDTO> histo;
+		List<CandleDTO> histo1;
+		
 		switch (symbol.getType()){
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			histo = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode(), start, end);
+			return assembleCandles(histo1);
 		case FOREX:
-			throw new UnsupportedOperationException();
+			histo1 = ((LouxorFacade)reader).readForexDailyHistory(symbol.getCode());
+			return assembleCandles(histo1);
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
-			histo = ((LouxorFacade)reader).readFutureDailyHistoryByName(symbol.getCode());
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readFutureDailyHistoryByName(symbol.getCode());
+			return assembleCandles(histo1);
 		case INDEX:
-			throw new UnsupportedOperationException();
+			histo1 = ((LouxorFacade)reader).readForexDailyHistory(symbol.getCode());
+			return assembleCandles(histo1);
 		case OPTION:
 			throw new UnsupportedOperationException();
 		case SWAP:
@@ -56,8 +59,8 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case TIME_DEPOSIT:
 			throw new UnsupportedOperationException();
 		case TRACKER:
-			histo = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
+			return assembleCandles(histo1);
 		case UNKNOWN:
 			throw new UnsupportedOperationException();
 		case WARRANT:
@@ -69,20 +72,21 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 
 
 	public CandleSerie readCandleSerie(InstrumentId symbol, Object reader) {
+		List<CandleDTO> histo1;
 		switch (symbol.getType()){
 		case BOND:
 			throw new UnsupportedOperationException();
 		case EQUITY:
-			List<CandleDTO> histo = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode());
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readStockDailyHistory(symbol.getCode(),symbol.getExchange().getCode());
+			return assembleCandles(histo1);
 		case FOREX:
-			histo = ((LouxorFacade)reader).readForexDailyHistory(symbol.getCode());
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readForexDailyHistory(symbol.getCode());
+			return assembleCandles(histo1);
 		case FUND:
 			throw new UnsupportedOperationException();
 		case FUTURE:
-			histo = ((LouxorFacade)reader).readFutureDailyHistoryByName(symbol.getCode());
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readFutureDailyHistoryByName(symbol.getCode());
+			return assembleCandles(histo1);
 		case INDEX:
 			throw new UnsupportedOperationException();
 		case OPTION:
@@ -92,8 +96,8 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		case TIME_DEPOSIT:
 			throw new UnsupportedOperationException();
 		case TRACKER:
-			histo = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
-			return assembleCandles(histo);
+			histo1 = ((LouxorFacade)reader).readTrackerDailyHistory(symbol.getCode());
+			return assembleCandles(histo1);
 		case WARRANT:
 			throw new UnsupportedOperationException();
 		case UNKNOWN:
@@ -133,6 +137,12 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		return gf;
 	}
 	
+	
+	/**
+	 * Assemble CandleSerie from a {@link ListedMarketCandleDTO} collection
+	 * @param histo
+	 * @return {@link CandleSerie}
+	 */
 	private CandleSerie assembleCandles(List<CandleDTO> histo) {
 		
 		CandleSerie cs = new CandleSerie();
@@ -140,6 +150,7 @@ public class LouxorAdapter implements IMarketDataProviderAdapter {
 		if (histo != null){
 			for(CandleDTO candle : histo){
 				DateTime dt = new DateTime(candle.getTimestamp(), DateTimeZone.getDefault());
+				
 				cs.addValue( 
 						new Candle( dt, 
 								Periods.ONE_DAY,

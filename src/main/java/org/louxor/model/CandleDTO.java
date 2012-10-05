@@ -7,18 +7,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+
+import org.hibernate.annotations.Immutable;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @IdClass(CandleId.class)
+@Immutable
 public class CandleDTO implements Serializable {
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2393041434146158772L;
+
+	private Integer volume;
+	
+	private Long vwap;
+	
+	@Column(name = "OPEN_INTEREST")
+	private Long openInterest;
 	
 	
 	@Id
@@ -48,14 +56,6 @@ public class CandleDTO implements Serializable {
 	private Long low;
 
 	private Long close;
-
-	private Integer volume;
-
-	private Long vwap;
-
-	@Column(name="OPEN_INTEREST")
-	private Long openInterest;
-	
 
 	public String getTickerId() {
 		return tickerId;
@@ -169,10 +169,10 @@ public class CandleDTO implements Serializable {
 	public void setOpenInterest(Long openInterest) {
 		this.openInterest = openInterest;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Candle [timestamp=" + timestamp + ", open=" + open + ", high=" + high + ", low=" + low + ", close=" + close + ", volume=" + volume + "]";
+		return "Candle [timestamp=" + timestamp + ", open=" + open + ", high=" + high + ", low=" + low + ", close=" + close  + "]";
 	}
 
 

@@ -103,7 +103,17 @@ select ticker_id,internal_code,mic_code,name,inception_date,first_quote,last_quo
 
 select ticker_id, name,foreign_currency,payment_currency,first_quote,last_quote,quotation_factor from ticker_forex;
 
+
 alter table candle_forex add open_interest DECIMAL(10,4);
 alter table candle_forex add volume INT;
 update candle_forex set volume = 0;
 alter table candle_forex add vwap DECIMAL(10,4);
+alter table candle_forex drop column volume;
+alter table candle_forex drop column open_interest;
+alter table candle_forex drop column vwap;
+-- Index(es)
+select * from ticker_index where internal_code = 'IND_CAC_40';
+delete from ticker_index where ticker_id = 0;
+
+
+select count(*) from candle_index where ticker_id=0;

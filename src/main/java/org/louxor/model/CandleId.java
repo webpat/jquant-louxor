@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Identifiant pour un {@link StockCandle}
+ * Identifiant pour un {@link CandleDTO}
  * @author patrick.merheb
  *
  */
